@@ -15,6 +15,10 @@
       <label for="wireframe"> Show wireframe</label><br>
 
       <input type="color" id="bgColor" name="bgColor" value="#B9D3EE">
+      <label for="bgColor"> Background</label><br>
+
+      <input type="checkbox" id="autoRotate" name="autoRotate" checked="true">
+      <label for="autoRotate"> Auto Rotate</label><br>
     </div>
 		<script type="module">
       import * as THREE from 'https://cdn.skypack.dev/three@0.129.0';
@@ -107,6 +111,9 @@ import {OrbitControls} from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/
 
           const bgColor = document.getElementById("bgColor").value;
           renderer.setClearColor(bgColor);
+
+          const autoRotate = document.getElementById("autoRotate").checked;
+          controls.autoRotate = autoRotate;
 
         controls.update();
         render();
