@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - glTF loader (MOD)</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="style.css">
+	</head>
+
+	<body>
+		<div id="info">
+			My GLTF Viewer
+		</div>
+
+		<script type="module">
+			import * as THREE from 'https://cdn.skypack.dev/three@0.129.0';
+
+			import { OrbitControls } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js';
+			import { TrackballControls } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/TrackballControls.js';
+			import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+
+			var container, controls;
+			var camera, light, light1, light2, light3, scene, renderer;
+			var clock = new THREE.Clock();
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 20 );
+				camera.position.set( 0.0, 0.0, 4. );
+
+				scene = new THREE.Scene();
+				
+				light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+				scene.add( light );
+				
+				/*
+				light1 = new THREE.PointLight(0xffffff, 1, 0 );
+				light1.position.set(0.0, 0.0, 10.);
+				scene.add( light1 );
+				
+				light2 = new THREE.PointLight(0xffffff, 1, 0 );
+				light2.position.set(0.0, 0.0, -10.);
+				scene.add( light2 );
+				
+				light3 = new THREE.PointLight(0xffffff, 1, 0 );
+				light3.position.set(0.0, 10.0, 0.0);
+				scene.add( light3 );
+				*/
+
+				var loader = new GLTFLoader().setPath( 'models/Suzanne/' );
+				loader.load( 'cylinder_00.gltf', function ( gltf ) {
+					//gltf.scene.traverse( function ( child ) {} );
+					scene.add( gltf.scene );
+					render();
+					} );
+					
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 0.8;
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				container.appendChild( renderer.domElement );
+
+				controls = new TrackballControls( camera, renderer.domElement );
+				controls.target.set( 0, 0, 0. );
+				//controls.addEventListener('change', render);
+				//controls.minDistance = 2;
+				//controls.maxDistance = 10;
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+			
+			function animate() {
+				requestAnimationFrame(animate);    
+				scene.rotation.y += 0.1 * Math.PI/180;
+				controls.update();
+				renderer.render(scene, camera);
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				controls.handleResize();
+				render();
+
+			}
+
+			function render() {
+				renderer.render( scene, camera );
+			}
+
+		</script>
+
+	</body>
+</html>

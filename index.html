@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - glTF loader (MOD)</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="style.css">
+    
+		
+	</head>
+
+	<body>
+    <div>
+      <input type="checkbox" id="wireframe" name="wireframe">
+      <label for="wireframe"> Show wireframe</label><br>
+
+      <input type="color" id="bgColor" name="bgColor" value="#B9D3EE">
+    </div>
+		<script type="module">
+      import * as THREE from 'https://cdn.skypack.dev/three@0.129.0';
+import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+import {OrbitControls} from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js';
+			var container, controls;
+			var camera, light1, light2, light3, scene, renderer;
+
+			init();
+			render();
+
+			function init() {
+/*
+				var bbox = new THREE.Box3().setFromObject(mroot);
+    			var cent = bbox.getCenter(new THREE.Vector3());
+    			var size = bbox.getSize(new THREE.Vector3());*/
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 500 );
+				camera.position.set( 0.0, 0.0, 50. );
+
+				scene = new THREE.Scene();
+				
+				//light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+				//scene.add( light );
+				
+				light1 = new THREE.PointLight(0xffffff, 1, 0 );
+				light1.position.set(0.0, 0.0, 10.);
+				scene.add( light1 );
+				
+				light2 = new THREE.PointLight(0xffffff, 1, 0 );
+				light2.position.set(0.0, 0.0, -10.);
+				scene.add( light2 );
+				
+				light3 = new THREE.PointLight(0xffffff, 1, 0 );
+				light3.position.set(0.0, 10.0, 0.0);
+				scene.add( light3 );
+
+				var loader = new GLTFLoader();
+				loader.load( '../models/My_Suzanne.gltf', function ( gltf ) {
+					//gltf.scene.traverse( function ( child ) {} );
+					console.log(gltf);
+					scene.add( gltf.scene );
+					render();
+					}, undefined, function ( error ) {
+
+                        console.error( error );
+                    
+                    } );
+					
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 0.8;
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				container.appendChild( renderer.domElement );
+
+				var pmremGenerator = new THREE.PMREMGenerator( renderer );
+				pmremGenerator.compileEquirectangularShader();
+
+				controls = new OrbitControls( camera, renderer.domElement );
+				controls.autoRotate = true;
+        controls.autoRotateSpeed = -3;
+        controls.screenSpacePanning = true;
+
+        requestAnimationFrame( animate );
+				window.addEventListener( 'resize', onWindowResize, false );
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				render();
+			}
+
+			function animate () {
+        requestAnimationFrame(animate)
+
+        const wireframe = document.getElementById("wireframe").checked;
+        traverseMaterials(scene, (material) => {
+            material.wireframe = wireframe;
+          });
+
+          const bgColor = document.getElementById("bgColor").value;
+          renderer.setClearColor(bgColor);
+
+        controls.update();
+        render();
+    }
+
+			function render() {
+
+				renderer.render( scene, camera );
+
+			}
+
+      function traverseMaterials (model, callback) {
+    model.traverse((node) => {
+      if (!node.isMesh) return;
+      const materials = Array.isArray(node.material)
+        ? node.material
+        : [node.material];
+      materials.forEach(callback);
+    });
+  }
+      
+
+    </script>
+	</body>
+</html>

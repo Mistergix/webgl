@@ -1,0 +1,126 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v0.9.67",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "name" : "Suzanne",
+            "mesh" : 0
+        }
+    ],
+    "materials" : [
+        {
+            "name" : "Material.001",
+            "pbrMetallicRoughness" : {
+                "metallicFactor" : 0,
+                "baseColorTexture" : {
+                    "texCoord" : 0,
+                    "index" : 0
+                },
+                "roughnessFactor" : 0
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Suzanne",
+            "primitives" : [
+                {
+                    "material" : 0,
+                    "indices" : 3,
+                    "attributes" : {
+                        "NORMAL" : 0,
+                        "POSITION" : 1,
+                        "TEXCOORD_0" : 2
+                    }
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "source" : 0
+        }
+    ],
+    "images" : [
+        {
+            "uri" : "Delphinus_delphis_02.jpg",
+            "mimeType" : "image/jpeg",
+            "name" : "Delphinus_delphis_02"
+        }
+    ],
+    "accessors" : [
+        {
+            "count" : 1968,
+            "componentType" : 5126,
+            "type" : "VEC3",
+            "bufferView" : 0
+        },
+        {
+            "type" : "VEC3",
+            "bufferView" : 1,
+            "count" : 1968,
+            "componentType" : 5126,
+            "min" : [
+                -1.3671875,
+                -0.984375,
+                -0.8515625
+            ],
+            "max" : [
+                1.3671875,
+                0.984375,
+                0.8515625
+            ]
+        },
+        {
+            "count" : 1968,
+            "componentType" : 5126,
+            "type" : "VEC2",
+            "bufferView" : 2
+        },
+        {
+            "count" : 2904,
+            "componentType" : 5123,
+            "type" : "SCALAR",
+            "bufferView" : 3
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteOffset" : 0,
+            "byteLength" : 23616
+        },
+        {
+            "buffer" : 0,
+            "byteOffset" : 23616,
+            "byteLength" : 23616
+        },
+        {
+            "buffer" : 0,
+            "byteOffset" : 47232,
+            "byteLength" : 15744
+        },
+        {
+            "buffer" : 0,
+            "byteOffset" : 62976,
+            "byteLength" : 5808
+        }
+    ],
+    "buffers" : [
+        {
+            "uri" : "Suzanne_01.bin",
+            "byteLength" : 68784
+        }
+    ]
+}

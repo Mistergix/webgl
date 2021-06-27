@@ -1,0 +1,126 @@
+{
+    "asset" : {
+        "version" : "2.0",
+        "generator" : "Khronos glTF Blender I/O v0.9.67"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "nodes" : [
+                0
+            ],
+            "name" : "Scene"
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Cylinder"
+        }
+    ],
+    "materials" : [
+        {
+            "pbrMetallicRoughness" : {
+                "roughnessFactor" : 0,
+                "baseColorTexture" : {
+                    "index" : 0,
+                    "texCoord" : 0
+                },
+                "metallicFactor" : 0
+            },
+            "name" : "Material.001"
+        }
+    ],
+    "meshes" : [
+        {
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "TEXCOORD_0" : 0,
+                        "NORMAL" : 1,
+                        "POSITION" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ],
+            "name" : "Cylinder"
+        }
+    ],
+    "textures" : [
+        {
+            "source" : 0
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Delphinus_delphis_02",
+            "uri" : "Delphinus_delphis_02.jpg"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "count" : 192,
+            "type" : "VEC2",
+            "componentType" : 5126
+        },
+        {
+            "bufferView" : 1,
+            "count" : 192,
+            "type" : "VEC3",
+            "componentType" : 5126
+        },
+        {
+            "bufferView" : 2,
+            "count" : 192,
+            "max" : [
+                1,
+                1,
+                1
+            ],
+            "type" : "VEC3",
+            "min" : [
+                -1,
+                -1,
+                -1
+            ],
+            "componentType" : 5126
+        },
+        {
+            "bufferView" : 3,
+            "count" : 372,
+            "type" : "SCALAR",
+            "componentType" : 5123
+        }
+    ],
+    "bufferViews" : [
+        {
+            "byteLength" : 1536,
+            "byteOffset" : 0,
+            "buffer" : 0
+        },
+        {
+            "byteLength" : 2304,
+            "byteOffset" : 1536,
+            "buffer" : 0
+        },
+        {
+            "byteLength" : 2304,
+            "byteOffset" : 3840,
+            "buffer" : 0
+        },
+        {
+            "byteLength" : 744,
+            "byteOffset" : 6144,
+            "buffer" : 0
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 6888,
+            "uri" : "cylinder_00.bin"
+        }
+    ]
+}

@@ -1,0 +1,126 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v0.9.67",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "name" : "Cube",
+            "mesh" : 0
+        }
+    ],
+    "materials" : [
+        {
+            "name" : "Material.001",
+            "pbrMetallicRoughness" : {
+                "metallicFactor" : 0,
+                "baseColorTexture" : {
+                    "texCoord" : 0,
+                    "index" : 0
+                },
+                "roughnessFactor" : 0
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Cube.001",
+            "primitives" : [
+                {
+                    "material" : 0,
+                    "indices" : 3,
+                    "attributes" : {
+                        "NORMAL" : 0,
+                        "POSITION" : 1,
+                        "TEXCOORD_0" : 2
+                    }
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "source" : 0
+        }
+    ],
+    "images" : [
+        {
+            "uri" : "Delphinus_delphis_02.jpg",
+            "mimeType" : "image/jpeg",
+            "name" : "Delphinus_delphis_02"
+        }
+    ],
+    "accessors" : [
+        {
+            "count" : 24,
+            "componentType" : 5126,
+            "type" : "VEC3",
+            "bufferView" : 0
+        },
+        {
+            "type" : "VEC3",
+            "bufferView" : 1,
+            "count" : 24,
+            "componentType" : 5126,
+            "min" : [
+                -1,
+                -1,
+                -1
+            ],
+            "max" : [
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "count" : 24,
+            "componentType" : 5126,
+            "type" : "VEC2",
+            "bufferView" : 2
+        },
+        {
+            "count" : 36,
+            "componentType" : 5123,
+            "type" : "SCALAR",
+            "bufferView" : 3
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteOffset" : 0,
+            "byteLength" : 288
+        },
+        {
+            "buffer" : 0,
+            "byteOffset" : 288,
+            "byteLength" : 288
+        },
+        {
+            "buffer" : 0,
+            "byteOffset" : 576,
+            "byteLength" : 192
+        },
+        {
+            "buffer" : 0,
+            "byteOffset" : 768,
+            "byteLength" : 72
+        }
+    ],
+    "buffers" : [
+        {
+            "uri" : "Dolphin_00.bin",
+            "byteLength" : 840
+        }
+    ]
+}

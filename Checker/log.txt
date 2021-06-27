@@ -1,0 +1,10 @@
++ interface ProtoViz
++ option : commencer le checker de l'autre coté sur chaque mur
++ option : offset checker xy
++ taille checker différent selon axe
++ colonnes d'aide au dessin
++ optimiszer update UI
++ changer couleurs layout (thèmes plus design)
++ reset individuels des paramètres
++ fish-eye!! : render to texture : http://learningwebgl.com/blog/?p=1786
++ OBJ model
