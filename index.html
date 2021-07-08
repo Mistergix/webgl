@@ -19,6 +19,28 @@
 
       <input type="checkbox" id="autoRotate" name="autoRotate" checked="true">
       <label for="autoRotate"> Auto Rotate</label><br>
+
+	  <input type="checkbox" id="depth" name="depth" checked="true">
+      <label for="depth"> Depth Test and Write</label><br>
+
+	  <input type="checkbox" id="transparent" name="transparent">
+      <label for="transparent"> Transparent</label><br>
+
+	  <input type="range" min="1" max="100" value="50" id="opacity" name="opacity">
+	  <label for="opacity"> Opacity</label><br>
+
+	  <input type="range" min="1" max="100" value="50" id="roughness" name="roughness">
+	  <label for="roughness"> Roughness</label><br>
+
+	  <input type="range" min="1" max="100" value="50" id="metalness" name="metalness">
+	  <label for="metalness"> Metalness</label><br>
+
+
+	  <input type="checkbox" id="applyMapToAll" name="applyMapToAll">
+	  <label for="applyMapToAll">Apply Selected normal Map to all materials (if not, only water)</label><br>
+  <input type="file" id="waterNormal" name="waterNormal" accept="image/*">
+  <label for="waterNormal">Select Water Normal:</label><br>
+
     </div>
 		<script type="module">
       import * as THREE from 'https://cdn.skypack.dev/three@0.129.0';
@@ -56,7 +78,7 @@ import {OrbitControls} from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/
 				scene.add( light2 );
 				
 				light3 = new THREE.PointLight(0xffffff, 1, 0 );
-				light3.position.set(0.0, 10.0, 0.0);
+				light3.position.set(0.0, 50.0, 0.0);
 				scene.add( light3 );
 
 				var loader = new GLTFLoader();
@@ -84,10 +106,43 @@ import {OrbitControls} from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/
 
 				controls = new OrbitControls( camera, renderer.domElement );
 				controls.autoRotate = true;
-        controls.autoRotateSpeed = -3;
-        controls.screenSpacePanning = true;
+        		controls.autoRotateSpeed = -3;
+        		controls.screenSpacePanning = true;
 
-        requestAnimationFrame( animate );
+
+				document.getElementById('waterNormal').addEventListener('change', function(){
+					var reader = new FileReader();
+					reader.onload = function()
+					{
+						var arrayBuffer = this.result;
+						var imageBlob = new Blob([arrayBuffer], {type: "image/png"});
+						var url = URL.createObjectURL(imageBlob);
+						var texture = new THREE.Texture();
+						var image = new Image();
+						image.src = url;
+						image.onload = function() { 
+							texture.image = image; 
+							texture.needsUpdate = true; 
+							const applyMapToAll = document.getElementById("applyMapToAll").checked;
+							traverseMaterials(scene, (material) => {
+								let apply = true;
+								if(!applyMapToAll) {
+									apply = material.name === "Toon Water";
+								}
+								console.log(material.name);
+								if(apply) {
+									material.normalMap = texture;
+									material.needsUpdate  = true;
+								}
+							
+						});
+						};
+					}	
+
+					reader.readAsArrayBuffer(this.files[0]);
+		}, false);
+
+       			requestAnimationFrame( animate );
 				window.addEventListener( 'resize', onWindowResize, false );
 			}
 
@@ -105,8 +160,19 @@ import {OrbitControls} from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/
         requestAnimationFrame(animate)
 
         const wireframe = document.getElementById("wireframe").checked;
+		const depth = document.getElementById("depth").checked;
+		const transparent = document.getElementById("transparent").checked;
+		const opacity = document.getElementById("opacity").value;
+		const roughness = document.getElementById("roughness").value;
+		const metalness = document.getElementById("metalness").value;
         traverseMaterials(scene, (material) => {
             material.wireframe = wireframe;
+			material.depthTest = depth;
+			material.depthWrite = depth;
+			material.transparent = transparent;
+			material.opacity = opacity / 100.0;
+			material.roughness = roughness / 100.0;
+			material.metalness = metalness / 100.0;
           });
 
           const bgColor = document.getElementById("bgColor").value;
@@ -114,7 +180,6 @@ import {OrbitControls} from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/
 
           const autoRotate = document.getElementById("autoRotate").checked;
           controls.autoRotate = autoRotate;
-
         controls.update();
         render();
     }
